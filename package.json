@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "npx eslint .",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "author": "vadim elsukov",
   "license": "ISC",
@@ -19,6 +21,9 @@
     "validator": "^13.11.0"
   },
   "devDependencies": {
+    "eslint": "^8.48.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.1",
     "nodemon": "^3.0.1"
   }
 }
