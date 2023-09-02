@@ -43,5 +43,5 @@ app.use((err, req, res, next) => {
   });
   next();
 });
-
+console.log(PORT);
 app.listen(PORT);
