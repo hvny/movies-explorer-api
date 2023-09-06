@@ -19,10 +19,11 @@ module.exports.createMovie = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
+    thumbnail,
+    movieId,
     nameRU,
     nameEN,
-    thumbnail,
   } = req.body;
 
   Movie.create({
@@ -32,16 +33,17 @@ module.exports.createMovie = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
+    thumbnail,
+    movieId,
     nameRU,
     nameEN,
-    thumbnail,
     owner: req.user._id,
   })
-    .then((movie) => res.status(201).send(movie))
+    .then((movie) => res.send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new ValidationError('Переданы некорретные данные.');
+        next(new ValidationError('Переданы некорретные данные.'));
       } else {
         next(err);
       }

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const isURL = require('validator/lib/isURL');
 
 const movieSchema = mongoose.Schema({
-  coutry: {
+  country: {
     type: String,
     required: true,
   },
@@ -15,7 +15,7 @@ const movieSchema = mongoose.Schema({
     required: true,
   },
   year: {
-    type: Number,
+    type: String,
     required: true,
   },
   description: {
