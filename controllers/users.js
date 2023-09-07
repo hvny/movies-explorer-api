@@ -7,13 +7,19 @@ const NotFoundError = require('../errors/NotFoundError');
 const ValidationError = require('../errors/ValidationError');
 const ConflictError = require('../errors/ConflictError');
 
+const {
+  userNotFoundMessage,
+  validationErrorMessage,
+  conflictErrorMessage,
+} = require('../constants/constants');
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUserInfo = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       if (!user) {
-        next(new NotFoundError('Пользователь не найден.'));
+        next(new NotFoundError(userNotFoundMessage));
       }
       res.send({ data: user });
     })
@@ -32,7 +38,10 @@ module.exports.updateUserInfo = (req, res, next) => {
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new ValidationError('Переданы некорректные данные.');
+        next(new ValidationError(validationErrorMessage));
+      }
+      if (err.code === 11000) {
+        next(new ConflictError(conflictErrorMessage));
       } else {
         next(err);
       }
@@ -70,11 +79,11 @@ module.exports.createUser = (req, res, next) => {
         }))
         .catch((err) => {
           if (err.code === 11000) {
-            next(new ConflictError('Пользователь с такой электронной почтой уже существует.'));
+            next(new ConflictError(conflictErrorMessage));
             return;
           }
           if (err.name === 'ValidationError') {
-            next(new ValidationError('Переданы некорретные данные.'));
+            next(new ValidationError(validationErrorMessage));
             return;
           }
           next(err);

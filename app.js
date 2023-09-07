@@ -9,7 +9,8 @@ const cors = require('cors');
 const { errors } = require('celebrate');
 const { limiter } = require('./middlewares/limiter');
 
-const router = require('./routes/index');
+const router = require('./routes');
+const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT, DB_ADRESS } = require('./constants/constants');
 
@@ -19,6 +20,7 @@ mongoose.connect(DB_ADRESS);
 app.use(cors({
   origin: [
     'http://127.0.0.1:3000',
+    'https://127.0.0.1:3000',
     'http://api.hvny-diplom.students.nomoredomainsicu.ru',
     'https://api.hvny-diplom.students.nomoredomainsicu.ru',
   ],
@@ -36,6 +38,8 @@ app.use(router);
 
 app.use(errorLogger);
 app.use(errors());
+app.use(errorHandler);
+/*
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res.status(statusCode).send({
@@ -44,6 +48,6 @@ app.use((err, req, res, next) => {
       : message,
   });
   next();
-});
+}); */
 
 app.listen(PORT);
