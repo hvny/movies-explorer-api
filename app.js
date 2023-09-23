@@ -19,11 +19,10 @@ mongoose.connect(DB_ADRESS);
 
 app.use(cors({
   origin: [
-    'http://127.0.0.1:3000',
-    'https://127.0.0.1:3000',
+    'http://localhost:3001',
+    'http://localhost:3000',
     'http://api.hvny-diplom.students.nomoredomainsicu.ru',
-    'https://api.hvny-diplom.students.nomoredomainsicu.ru',
-  ],
+    'https://api.hvny-diplom.students.nomoredomainsicu.ru'],
   credentials: true,
 }));
 
