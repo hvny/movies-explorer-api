@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 const { errors } = require('celebrate');
@@ -16,10 +17,12 @@ const { PORT, DB_ADRESS } = require('./constants/constants');
 const app = express();
 mongoose.connect(DB_ADRESS);
 
+app.use(cookieParser);
 app.use(cors({
   origin: [
     'http://localhost:3001',
     'http://localhost:3000',
+    'https://localhost:3000',
     'http://api.hvny-diplom.students.nomoredomainsicu.ru',
     'https://api.hvny-diplom.students.nomoredomainsicu.ru'],
   credentials: true,
