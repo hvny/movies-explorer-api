@@ -22,7 +22,6 @@ app.use(cors({
     'http://localhost:3000',
     'http://api.hvny-diplom.students.nomoredomainsicu.ru',
     'https://api.hvny-diplom.students.nomoredomainsicu.ru'],
-  credentials: true,
 }));
 
 app.use(bodyParser.json());
@@ -36,15 +35,5 @@ app.use(router);
 app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
-/*
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
-  res.status(statusCode).send({
-    message: statusCode === 500
-      ? 'На сервере произошла ошибка'
-      : message,
-  });
-  next();
-}); */
 
 app.listen(PORT);
