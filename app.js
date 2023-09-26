@@ -22,6 +22,7 @@ app.use(cors({
     'http://localhost:3000',
     'http://api.hvny-diplom.students.nomoredomainsicu.ru',
     'https://api.hvny-diplom.students.nomoredomainsicu.ru'],
+  credentials: true,
 }));
 
 app.use(bodyParser.json());
