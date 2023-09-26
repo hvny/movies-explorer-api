@@ -17,7 +17,7 @@ const { PORT, DB_ADRESS } = require('./constants/constants');
 const app = express();
 mongoose.connect(DB_ADRESS);
 
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(cors({
   origin: [
     'http://localhost:3001',
